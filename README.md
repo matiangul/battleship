@@ -16,3 +16,7 @@ https://nodejs.org/en/
 ## Build an app
 
 `npm run build`
+
+## Run tests
+
+`npm test`
