@@ -1,0 +1,12 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "Battleship one side game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["game", "battleship"],
+  "author": "Mateusz Angulski <mateusz@angulski.pl> (https://angulski.pl/)",
+  "license": "ISC"
+}
