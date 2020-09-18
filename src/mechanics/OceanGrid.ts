@@ -1,5 +1,5 @@
-import { Fleet } from "./Fleet";
+import { Ship } from "./Ship";
 
 export class OceanGrid {
-  constructor(private readonly fleet: Fleet) {}
+  constructor(private readonly fleet: Ship[]) {}
 }

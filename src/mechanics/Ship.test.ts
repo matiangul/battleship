@@ -1,16 +1,18 @@
 import { Battleship, Destroyer, Ship, Shipify } from "./Ship";
 
 describe("Ship", () => {
+  const XShip = Shipify("XShip", 6);
+
   test("can be dynamically created out of name and size", () => {
-    expect(new (Shipify("Xship", 6))()).toBeInstanceOf(Ship);
+    expect(new (Shipify("XShip", 6))()).toBeInstanceOf(Ship);
   });
 
-  test("created dynamically has passed name", () => {
-    expect(new (Shipify("Xship", 6))().name).toBe("Xship");
+  test("has name", () => {
+    expect(new XShip().name).toBe("XShip");
   });
 
-  test("created dynamically has passed size", () => {
-    expect(new (Shipify("Xship", 6))().size).toBe(6);
+  test("has size", () => {
+    expect(new XShip().size).toBe(6);
   });
 });
 

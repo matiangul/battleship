@@ -2,7 +2,7 @@ export abstract class Ship {
   constructor(readonly name: string, readonly size: number) {}
 }
 
-export function Shipify(name: string, size: number) {
+export function Shipify(name: string, size: number,) {
   return class extends Ship {
     constructor() {
       super(name, size);
