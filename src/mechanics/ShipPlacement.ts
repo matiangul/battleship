@@ -9,16 +9,20 @@ type Direction = "N" | "E" | "S" | "W";
  * Represents where and how the ship is placed on the grid.
  */
 export class ShipPlacement {
-  private readonly direction: Direction;
+  public readonly direction: Direction;
 
   constructor(
-    private readonly ship: Ship,
-    private readonly bow: GridCoordinates,
+    public readonly ship: Ship,
+    public readonly bow: GridCoordinates,
     direction: string
   ) {
     this.assertDirection(direction);
     this.direction = direction;
     this.assertSternHasValidGridCoordinates();
+  }
+
+  public toString(): string {
+    return `${this.ship.name}('${this.bow.column}', ${this.bow.row}, '${this.direction}')`;
   }
 
   private assertDirection(direction: string): asserts direction is Direction {
