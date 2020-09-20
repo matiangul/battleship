@@ -10,6 +10,7 @@ type Direction = "N" | "E" | "S" | "W";
  */
 export class ShipPlacement {
   public readonly direction: Direction;
+  public readonly stern: GridCoordinates;
 
   constructor(
     public readonly ship: Ship,
@@ -19,6 +20,10 @@ export class ShipPlacement {
     this.assertDirection(direction);
     this.direction = direction;
     this.assertSternHasValidGridCoordinates();
+    this.stern = new GridCoordinates(
+      this.calculateSternColumn(),
+      this.calculateSternRow()
+    );
   }
 
   public toString(): string {
@@ -27,7 +32,7 @@ export class ShipPlacement {
 
   private assertDirection(direction: string): asserts direction is Direction {
     if (!DIRECTIONS.includes(direction)) {
-      throw new TypeError("ShipPlacement.direction must be one of N,E,S,W");
+      throw new TypeError("ShipPlacement.direction must be one of N, E, S, W");
     }
   }
 
@@ -47,13 +52,13 @@ export class ShipPlacement {
   private calculateSternColumn(): string {
     if (this.direction === "N") {
       return String.fromCharCode(
-        this.bow.column.charCodeAt(0) + this.ship.size
+        this.bow.columnCharCode + (this.ship.size - 1)
       );
     }
 
     if (this.direction === "S") {
       return String.fromCharCode(
-        this.bow.column.charCodeAt(0) - this.ship.size
+        this.bow.columnCharCode - (this.ship.size - 1)
       );
     }
 
@@ -62,11 +67,11 @@ export class ShipPlacement {
 
   private calculateSternRow(): number {
     if (this.direction === "E") {
-      return this.bow.row - this.ship.size;
+      return this.bow.row - (this.ship.size - 1);
     }
 
     if (this.direction === "W") {
-      return this.bow.row + this.ship.size;
+      return this.bow.row + (this.ship.size - 1);
     }
 
     return this.bow.row;

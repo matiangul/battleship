@@ -20,12 +20,20 @@ export class GridCoordinates {
     this.row = row;
   }
 
+  public equals(coords: GridCoordinates) {
+    return this.column === coords.column && this.row === coords.row;
+  }
+
+  public get columnCharCode(): number {
+    return this.column.charCodeAt(0);
+  }
+
   public get rowGridIndex(): number {
     return this.row - ROWS[0];
   }
 
   public get columnGridIndex(): number {
-    return this.column.charCodeAt(0) - COLUMNS[0].charCodeAt(0);
+    return this.columnCharCode - COLUMNS[0].charCodeAt(0);
   }
 
   private assertColumn(column: string): asserts column is Column {

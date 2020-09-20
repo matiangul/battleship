@@ -33,7 +33,7 @@ describe("ShipPlacement", () => {
       expect(
         () => new ShipPlacement(new Destroyer(), center, direction)
       ).toThrowError(
-        new TypeError("ShipPlacement.direction must be one of N,E,S,W")
+        new TypeError("ShipPlacement.direction must be one of N, E, S, W")
       )
     );
   });
@@ -43,20 +43,20 @@ describe("ShipPlacement", () => {
       expect(
         () => new ShipPlacement(new Destroyer(), center, direction)
       ).toThrowError(
-        new TypeError("ShipPlacement.direction must be one of N,E,S,W")
+        new TypeError("ShipPlacement.direction must be one of N, E, S, W")
       )
     );
   });
 
   test("does not accept stern with coordinates too far in north", () => {
     expect(() => new ShipPlacement(new Destroyer(), topLeft, "S")).toThrowError(
-      new RangeError("Ships stern has invalid GridCoordinates('=', 1)")
+      new RangeError("Ships stern has invalid GridCoordinates('>', 1)")
     );
   });
 
   test("does not accept stern with coordinates too far in west", () => {
     expect(() => new ShipPlacement(new Destroyer(), topLeft, "E")).toThrowError(
-      new RangeError("Ships stern has invalid GridCoordinates('A', -3)")
+      new RangeError("Ships stern has invalid GridCoordinates('A', -2)")
     );
   });
 
@@ -64,7 +64,7 @@ describe("ShipPlacement", () => {
     expect(
       () => new ShipPlacement(new Destroyer(), bottomRight, "N")
     ).toThrowError(
-      new RangeError("Ships stern has invalid GridCoordinates('N', 10)")
+      new RangeError("Ships stern has invalid GridCoordinates('M', 10)")
     );
   });
 
@@ -72,7 +72,31 @@ describe("ShipPlacement", () => {
     expect(
       () => new ShipPlacement(new Destroyer(), bottomRight, "W")
     ).toThrowError(
-      new RangeError("Ships stern has invalid GridCoordinates('J', 14)")
+      new RangeError("Ships stern has invalid GridCoordinates('J', 13)")
     );
+  });
+
+  test("accepts stern with coordinates on west boundary", () => {
+    expect(
+      () => new ShipPlacement(new Destroyer(), new GridCoordinates("E", 4), "E")
+    ).not.toThrow();
+  });
+
+  test("accepts stern with coordinates on east boundary", () => {
+    expect(
+      () => new ShipPlacement(new Destroyer(), new GridCoordinates("E", 7), "W")
+    ).not.toThrow();
+  });
+
+  test("accepts stern with coordinates on north boundary", () => {
+    expect(
+      () => new ShipPlacement(new Destroyer(), new GridCoordinates("D", 1), "S")
+    ).not.toThrow();
+  });
+
+  test("accepts stern with coordinates on south boundary", () => {
+    expect(
+      () => new ShipPlacement(new Destroyer(), new GridCoordinates("G", 1), "N")
+    ).not.toThrow();
   });
 });

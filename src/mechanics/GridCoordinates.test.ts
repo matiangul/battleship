@@ -63,4 +63,15 @@ describe("GridCoordinates", () => {
     expect(coordsA5.columnGridIndex).toBe(0);
     expect(coordsJ1.columnGridIndex).toBe(9);
   });
+
+  test("is value object and is comparable to other coordinates by its props", () => {
+    expect(coordsJ1.equals(coordsJ1)).toBe(true);
+    expect(coordsJ1.equals(new GridCoordinates("J", 1))).toBe(true);
+    expect(coordsJ1.equals(coordsA5)).toBe(false);
+  });
+
+  test("has column char code", () => {
+    expect(coordsJ1.columnCharCode).toEqual(74);
+    expect(coordsA5.columnCharCode).toEqual(65);
+  });
 });
