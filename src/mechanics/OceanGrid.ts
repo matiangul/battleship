@@ -8,10 +8,18 @@ export class OceanGrid {
   }
 
   private assertShipsDoNotOverlap() {
-    if (this.fleet[0].isOverlappedBy(this.fleet[1])) {
-      throw new OverlapsError(
-        `${this.fleet[0]} is overlapped by ${this.fleet[1]}`
-      );
+    const remaining = [...this.fleet];
+
+    for (
+      let head = remaining.shift();
+      remaining.length > 0;
+      head = remaining.shift()
+    ) {
+      remaining.forEach((next) => {
+        if (head.isOverlappedBy(next)) {
+          throw new OverlapsError(`${head} is overlapped by ${next}`);
+        }
+      });
     }
   }
 }
