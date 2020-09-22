@@ -74,4 +74,9 @@ describe("GridCoordinates", () => {
     expect(coordsJ1.columnCharCode).toEqual(74);
     expect(coordsA5.columnCharCode).toEqual(65);
   });
+
+  test("has string representation", () => {
+    expect(coordsJ1.toString()).toEqual("J1");
+    expect(coordsA5.toString()).toEqual("A5");
+  });
 });

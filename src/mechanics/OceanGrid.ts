@@ -8,13 +8,7 @@ export class OceanGrid {
   }
 
   private assertShipsDoNotOverlap() {
-    // @todo extract this logic to ShipPlacement
-    if (
-      this.fleet[0].bow.equals(this.fleet[1].bow) ||
-      this.fleet[0].stern.equals(this.fleet[1].stern) ||
-      this.fleet[0].stern.equals(this.fleet[1].bow) ||
-      this.fleet[0].bow.equals(this.fleet[1].stern)
-    ) {
+    if (this.fleet[0].isOverlappedBy(this.fleet[1])) {
       throw new OverlapsError(
         `${this.fleet[0]} is overlapped by ${this.fleet[1]}`
       );
