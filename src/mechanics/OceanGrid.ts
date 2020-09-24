@@ -1,3 +1,5 @@
+import { GridCoordinates, GridCoordinatesString } from './GridCoordinates';
+import { Ship } from './Ship';
 import { ShipPlacement } from "./ShipPlacement";
 
 export class OverlapsError extends Error {}
@@ -13,6 +15,14 @@ export class OceanGrid {
 
   public toString(): string {
     return `OceanGrid(${this.fleet.join(", ")})`;
+  }
+
+  public getShipOccuping(coords: GridCoordinates): Ship | undefined {
+    return this.fleet.find((placement) => placement.isOccupying(coords))?.ship;
+  }
+
+  public isShipFullyOccupiedBy(ship: Ship, coords: Set<GridCoordinatesString>): boolean {
+    return this.fleet.some((placement) => placement.ship === ship && placement.isOccupyingFully(coords));
   }
 
   private assertShipsDoNotOverlap() {

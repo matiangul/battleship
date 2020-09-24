@@ -215,4 +215,80 @@ describe("ShipPlacement", () => {
       ).toBe(true);
     });
   });
+
+  test("should know whether coordinates are ocuppied", () => {
+    expect(
+      new ShipPlacement(
+        new Battleship(),
+        new GridCoordinates("A", 5),
+        "N"
+      ).isOccupying(new GridCoordinates("A", 5))
+    ).toBe(true);
+    expect(
+      new ShipPlacement(
+        new Battleship(),
+        new GridCoordinates("A", 5),
+        "N"
+      ).isOccupying(new GridCoordinates("B", 5))
+    ).toBe(true);
+    expect(
+      new ShipPlacement(
+        new Battleship(),
+        new GridCoordinates("A", 5),
+        "N"
+      ).isOccupying(new GridCoordinates("E", 5))
+    ).toBe(true);
+
+    expect(
+      new ShipPlacement(
+        new Battleship(),
+        new GridCoordinates("A", 5),
+        "N"
+      ).isOccupying(new GridCoordinates("F", 5))
+    ).toBe(false);
+    expect(
+      new ShipPlacement(
+        new Battleship(),
+        new GridCoordinates("A", 5),
+        "N"
+      ).isOccupying(new GridCoordinates("A", 4))
+    ).toBe(false);
+    expect(
+      new ShipPlacement(
+        new Battleship(),
+        new GridCoordinates("A", 5),
+        "N"
+      ).isOccupying(new GridCoordinates("E", 6))
+    ).toBe(false);
+  });
+
+  test("should know whether ship coordinates are occupying fully passed coordinates", () => {
+    expect(
+      new ShipPlacement(
+        new Battleship(),
+        new GridCoordinates("A", 5),
+        "N"
+      ).isOccupyingFully(new Set([
+        new GridCoordinates("A", 5).toString(),
+        new GridCoordinates("C", 5).toString(),
+        new GridCoordinates("F", 5).toString(),
+        new GridCoordinates("B", 5).toString(),
+        new GridCoordinates("D", 5).toString(),
+        new GridCoordinates("E", 5).toString(),
+      ]))
+    ).toBe(true);
+
+    expect(
+      new ShipPlacement(
+        new Battleship(),
+        new GridCoordinates("A", 5),
+        "N"
+      ).isOccupyingFully(new Set([
+        new GridCoordinates("A", 5).toString(),
+        new GridCoordinates("B", 5).toString(),
+        new GridCoordinates("C", 5).toString(),
+        new GridCoordinates("J", 5).toString(),
+      ]))
+    ).toBe(false);
+  });
 });

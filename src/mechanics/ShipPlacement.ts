@@ -29,6 +29,16 @@ export class ShipPlacement {
     );
   }
 
+  public isOccupying(coords: GridCoordinates): boolean {
+    return this.occupiedCoordinates.has(coords.toString());
+  }
+
+  public isOccupyingFully(coords: Set<GridCoordinatesString>): boolean {
+    return [...this.occupiedCoordinates].every((occupied) =>
+      coords.has(occupied)
+    );
+  }
+
   public toString(): string {
     return `${this.ship.name}('${this.bow.column}', ${this.bow.row}, '${this.direction}')`;
   }
