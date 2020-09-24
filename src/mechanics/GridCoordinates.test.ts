@@ -54,16 +54,6 @@ describe("GridCoordinates", () => {
     );
   });
 
-  test("has row grid index", () => {
-    expect(coordsA5.rowGridIndex).toBe(4);
-    expect(coordsJ1.rowGridIndex).toBe(0);
-  });
-
-  test("has column grid index", () => {
-    expect(coordsA5.columnGridIndex).toBe(0);
-    expect(coordsJ1.columnGridIndex).toBe(9);
-  });
-
   test("is value object and is comparable to other coordinates by its props", () => {
     expect(coordsJ1.equals(coordsJ1)).toBe(true);
     expect(coordsJ1.equals(new GridCoordinates("J", 1))).toBe(true);
@@ -78,5 +68,10 @@ describe("GridCoordinates", () => {
   test("has string representation", () => {
     expect(coordsJ1.toString()).toEqual("J1");
     expect(coordsA5.toString()).toEqual("A5");
+  });
+
+  test("can generate random value", () => {
+    expect(GridCoordinates.random()).toBeInstanceOf(GridCoordinates);
+    expect(() => GridCoordinates.random()).not.toThrowError();
   });
 });

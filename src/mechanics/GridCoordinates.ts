@@ -14,6 +14,7 @@ export type GridCoordinatesString = string;
 export class GridCoordinates {
   public readonly column: Column;
   public readonly row: Row;
+  public static readonly POSSIBLE_OPTIONS_COUNT = COLUMNS.length * ROWS.length;
 
   constructor(column: string, row: number) {
     this.assertColumn(column);
@@ -48,11 +49,18 @@ export class GridCoordinates {
     return this.column.charCodeAt(0);
   }
 
-  public get rowGridIndex(): number {
-    return this.row - ROWS[0];
+  public static random(): GridCoordinates {
+    return new GridCoordinates(
+      GridCoordinates.randomColumn(),
+      GridCoordinates.randomRow()
+    );
   }
 
-  public get columnGridIndex(): number {
-    return this.columnCharCode - COLUMNS[0].charCodeAt(0);
+  private static randomColumn(): Column {
+    return COLUMNS[Math.round(Math.random() * (COLUMNS.length - 1))] as Column;
+  }
+
+  private static randomRow(): Row {
+    return ROWS[Math.round(Math.random() * (ROWS.length - 1))] as Row;
   }
 }

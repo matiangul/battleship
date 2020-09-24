@@ -1,8 +1,12 @@
 export abstract class Ship {
-  constructor(readonly name: string, readonly size: number) {}
+  constructor(public readonly name: string, public readonly size: number) {}
+
+  public toString(): string {
+    return this.name;
+  }
 }
 
-export function Shipify(name: string, size: number,) {
+export function Shipify(name: string, size: number) {
   return class extends Ship {
     constructor() {
       super(name, size);

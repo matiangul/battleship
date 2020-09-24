@@ -9,11 +9,13 @@ type Direction = "N" | "E" | "S" | "W";
  * Represents where and how the ship is placed on the grid.
  */
 export class ShipPlacement {
-  private readonly direction: Direction;
+  public readonly direction: Direction;
+  public static readonly POSSIBLE_OPTIONS_COUNT =
+    DIRECTIONS.length * GridCoordinates.POSSIBLE_OPTIONS_COUNT;
 
   constructor(
-    private readonly ship: Ship,
-    private readonly bow: GridCoordinates,
+    public readonly ship: Ship,
+    public readonly bow: GridCoordinates,
     direction: string
   ) {
     this.assertDirection(direction);
@@ -29,6 +31,12 @@ export class ShipPlacement {
 
   public toString(): string {
     return `${this.ship.name}('${this.bow.column}', ${this.bow.row}, '${this.direction}')`;
+  }
+
+  public static randomDirection(): Direction {
+    return DIRECTIONS[
+      Math.round(Math.random() * (DIRECTIONS.length - 1))
+    ] as Direction;
   }
 
   private assertDirection(direction: string): asserts direction is Direction {
