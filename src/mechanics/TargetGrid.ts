@@ -2,10 +2,10 @@ import { GridCoordinates, GridCoordinatesString } from "./GridCoordinates";
 import { OceanGrid } from "./OceanGrid";
 import { Ship } from "./Ship";
 
-class ShotResult {
+export class ShotResult {
   public constructor(
     public readonly status: "hit" | "missed" | "sunk",
-    public readonly ship?: Ship,
+    public readonly ship?: Ship
   ) {}
 }
 
@@ -18,9 +18,18 @@ export class TargetGrid {
     this.shots.add(shotCoords.toString());
 
     const hitShip = this.opponentsOceanGrid.getShipOccuping(shotCoords);
-    const hasBeenSunk = this.opponentsOceanGrid.isShipFullyOccupiedBy(hitShip, this.shots);
+    const hasBeenSunk = this.opponentsOceanGrid.isShipFullyOccupiedBy(
+      hitShip,
+      this.shots
+    );
     const status = hasBeenSunk ? "sunk" : hitShip ? "hit" : "missed";
 
     return new ShotResult(status, hitShip);
+  }
+
+  public get areAllSunk(): boolean {
+    return this.opponentsOceanGrid.fleet.every((placement) =>
+      this.opponentsOceanGrid.isShipFullyOccupiedBy(placement.ship, this.shots)
+    );
   }
 }
