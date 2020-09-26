@@ -3,15 +3,12 @@
 ## Prerequisites
 
 #### Nodejs and npm v12
+
 https://nodejs.org/en/
 
 ## Installation
 
 `npm install`
-
-## Run dev env
-
-`npm run dev`
 
 ## Build an app
 
@@ -20,3 +17,11 @@ https://nodejs.org/en/
 ## Run tests
 
 `npm test`
+
+## Play game in cli
+
+`npm run play`
+
+## Run dev env (frontend)
+
+`npm run dev`
